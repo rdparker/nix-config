@@ -58,5 +58,5 @@
     shells = with pkgs; [ bash zsh fish ];
   };
 
-  fonts.fonts = with pkgs; [ jetbrains-mono ];
+  fonts.fonts = with pkgs; [ emacs-all-the-icons-fonts fira fira-code font-awesome jetbrains-mono ];
 }

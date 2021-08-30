@@ -31,6 +31,7 @@
     systemPackages = with pkgs; [
       # editors
       neovim
+      emacs
 
       # standard toolset
       coreutils

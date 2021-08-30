@@ -156,7 +156,7 @@ def diskSetup():
     if not test_cmd("grep -q '^run\\b' /etc/synthetic.conf 2>/dev/null"):
         typer.secho("setting up /etc/synthetic.conf", fg=Colors.INFO.value)
         run_cmd(
-            'echo -e "run\\tprivate/var/run" | sudo tee -a /etc/synthetic.conf >/dev/null'
+            'echo -e "run\\tprivate/var/run" | sed "s/-e //" | sudo tee -a /etc/synthetic.conf >/dev/null'
         )
         run_cmd(
             "/System/Library/Filesystems/apfs.fs/Contents/Resources/apfs.util -B 2>/dev/null || true"

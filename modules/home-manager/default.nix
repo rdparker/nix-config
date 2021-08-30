@@ -60,6 +60,7 @@ in
         gnugrep
         gnupg
         gnused
+        home-manager
         htop
         httpie
         hyperfine

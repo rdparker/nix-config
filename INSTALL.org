@@ -17,3 +17,7 @@ sysdo bootstrap [host] # May obviate the need for disksetup as it is included.
 
 Bootstrap twice if Homebrew was not installed, but the installer
 installed it. That will load the Homebrew packages as well.
+
+PragmataPro must be manually installed.
+
+Doom Emacs is also manually cloned into ~~/.emacs.d~ for now.

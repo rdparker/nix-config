@@ -1,5 +1,10 @@
 { config, pkgs, ... }: {
   home.file = {
+    doom = {
+      source = ./doom-emacs;
+      target = ".doom.d";
+      recursive = true;
+    };
     keras = {
       source = ./keras;
       target = ".keras";

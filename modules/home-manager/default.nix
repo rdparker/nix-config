@@ -36,8 +36,8 @@ in
       stateVersion = "20.09";
       sessionVariables = {
         GPG_TTY = "/dev/ttys000";
-        EDITOR = "nvim";
-        VISUAL = "nvim";
+        EDITOR = "emacs";
+        VISUAL = "emacs";
         CLICOLOR = 1;
         LSCOLORS = "ExFxBxDxCxegedabagacad";
         KAGGLE_CONFIG_DIR = "${config.xdg.configHome}/kaggle";

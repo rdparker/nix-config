@@ -1,0 +1,19 @@
+Clone or download the repo.  On the Mac, cloning requires the command
+line developer tools.
+
+In the repo, bin/install-nix.sh.
+
+Start a new shell.
+
+- In the directory. `nix-shell`.  If prompted install the command line
+  developer tools and rerun `nix-shell`.
+
+sysdo disksetup
+
+- Ignore any transient error about `apfs.util -B...` as long as the
+  command completes successfully.
+
+sysdo bootstrap [host] # May obviate the need for disksetup as it is included.
+
+Bootstrap twice if Homebrew was not installed, but the installer
+installed it. That will load the Homebrew packages as well.

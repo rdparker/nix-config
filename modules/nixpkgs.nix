@@ -28,10 +28,13 @@
     binaryCaches = [
       "https://kclejeune.cachix.org"
       "https://nix-community.cachix.org/"
+      # Nightly Emacs build cache for github.com/cmacrae/emacs
+      "https://cachix.org/api/v1/cache/emacs"
     ];
     binaryCachePublicKeys = [
       "kclejeune.cachix.org-1:fOCrECygdFZKbMxHClhiTS6oowOkJ/I/dh9q9b1I4ko="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "emacs.cachix.org-1:b1SMJNLY/mZF6GxQE+eDBeps7WnkT0Po55TAyzwOxTY="
     ];
 
     registry = {

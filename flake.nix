@@ -18,6 +18,8 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     stable.url = "github:nixos/nixpkgs/nixos-21.05";
     treefmt.url = "github:numtide/treefmt";
+    emacs.url = "github:cmacrae/emacs";
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
     comma = {
       url = "github:Shopify/comma";
       flake = false;
@@ -46,6 +48,8 @@
     , nixos-hardware
     , devshell
     , treefmt
+    , emacs
+    , emacs-overlay
     , flake-utils
     , ...
     }:
@@ -61,6 +65,8 @@
 
       overlays = [
         devshell.overlay
+        emacs.overlay
+        emacs-overlay.overlay
         (final: prev: {
           # expose stable packages via pkgs.stable
           stable = import stable {

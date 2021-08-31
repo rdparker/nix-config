@@ -49,7 +49,20 @@
 
       # languages
       python3
-      ruby
+      # ruby
+
+      # Go
+      go
+      gocode
+      godef
+      gotools
+      golangci-lint
+      golint
+      go2nix
+      errcheck
+      gotags
+      gopls
+
     ];
     etc = {
       home-manager.source = "${inputs.home-manager}";

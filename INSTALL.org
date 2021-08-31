@@ -25,3 +25,5 @@ PragmataPro must be manually installed.
 Doom Emacs is also manually cloned into ~~/.emacs.d~ for now.
 
 Sign into iCloud.
+
+Sign into Exchange Account under Internet Accounts in System Preferences.

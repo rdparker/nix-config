@@ -27,3 +27,9 @@ Doom Emacs is also manually cloned into ~~/.emacs.d~ for now.
 Sign into iCloud.
 
 Sign into Exchange Account under Internet Accounts in System Preferences.
+
+* Manual Configuration
+** Raycast
+- Disable the Spotlight Keyboard Shortcut.
+
+- Add the ~/.local/bin/raycast directory under Raycast Preferences --> Extensions --> Scripts --> Script Directories.

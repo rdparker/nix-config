@@ -30,8 +30,8 @@
   environment = {
     systemPackages = with pkgs; [
       # editors
-      neovim
       emacs
+      neovim
 
       # standard toolset
       coreutils
@@ -43,6 +43,7 @@
       # helpful shell stuff
       bat
       fzf
+      shellcheck
       ripgrep
       zsh
 

@@ -36,5 +36,11 @@ in
       "mas"
       "teamookla/speedtest/speedtest"
     ];
+
+    casks = [
+      "goland"
+      "iglance"
+      "rider"
+    ];
   };
 }

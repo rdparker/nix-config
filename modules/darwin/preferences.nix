@@ -68,6 +68,8 @@
         KeyRepeat = 1;
         AppleShowAllExtensions = true;
         AppleShowScrollBars = "Automatic";
+        # Save to iCloud by default
+        NSDocumentSaveNewDocumentsToCloud = true;
       };
     };
 

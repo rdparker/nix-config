@@ -178,11 +178,11 @@
 
       homeConfigurations = {
         server = mkHomeConfig {
-          username = "kclejeune";
+          username = "rdp";
           extraModules = [ ./profiles/home-manager/personal.nix ];
         };
         workServer = mkHomeConfig {
-          username = "lejeukc1";
+          username = "pron";
           extraModules = [ ./profiles/home-manager/work.nix ];
         };
         multipass = mkHomeConfig {

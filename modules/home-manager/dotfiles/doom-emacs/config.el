@@ -30,7 +30,11 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+(use-package! theme-changer
+  :init (setq! calendar-location-name "North Carolina"
+               calendar-latitude 35
+               calendar-longitude -79)
+  :config (change-theme 'doom-tomorrow-day 'doom-tomorrow-night))
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!

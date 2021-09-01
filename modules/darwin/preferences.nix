@@ -63,9 +63,9 @@
         # allow key repeat
         ApplePressAndHoldEnabled = false;
         # delay before repeating keystrokes
-        InitialKeyRepeat = 10;
+        InitialKeyRepeat = 68;
         # delay between repeated keystrokes upon holding a key
-        KeyRepeat = 1;
+        KeyRepeat = 6;
         AppleShowAllExtensions = true;
         AppleShowScrollBars = "Automatic";
         # Save to iCloud by default

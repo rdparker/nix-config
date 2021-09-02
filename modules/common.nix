@@ -63,6 +63,9 @@
       errcheck
       gotags
       gopls
+      gomodifytags
+      gotests
+      gore
 
     ];
     etc = {

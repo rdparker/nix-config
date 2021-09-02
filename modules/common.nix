@@ -43,8 +43,9 @@
       # helpful shell stuff
       bat
       fzf
-      shellcheck
+      ispell
       ripgrep
+      shellcheck
       zsh
 
       # languages

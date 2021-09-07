@@ -38,6 +38,7 @@
       wget
       git
       jq
+      pstree
 
       # helpful shell stuff
       bat

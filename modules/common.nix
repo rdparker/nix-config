@@ -31,7 +31,6 @@
     systemPackages = with pkgs; [
       # editors
       emacs
-      neovim
 
       # standard toolset
       coreutils
@@ -47,26 +46,6 @@
       ripgrep
       shellcheck
       zsh
-
-      # languages
-      python3
-      # ruby
-
-      # Go
-      go
-      gocode
-      godef
-      gotools
-      golangci-lint
-      golint
-      go2nix
-      errcheck
-      gotags
-      gopls
-      gomodifytags
-      gotests
-      gore
-
     ];
     etc = {
       home-manager.source = "${inputs.home-manager}";

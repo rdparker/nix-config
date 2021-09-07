@@ -86,7 +86,6 @@ in
           "!gi() { curl -sL https://www.toptal.com/developers/gitignore/api/$@ ;}; gi";
       };
     };
-    go.enable = true;
     exa = {
       enable = true;
       enableAliases = true;

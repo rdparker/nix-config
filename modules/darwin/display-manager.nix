@@ -51,9 +51,9 @@
       debug_output = "on";
       display = "main";
       position = "top";
-      clock_format = "%r";
-      text_font = ''"PragmataPro Liga:Regular:12.0"'';
-      icon_font = ''"Font Awesome 5 Free:Solid:12.0"'';
+      clock_format = ''"%l:%M"'';
+      text_font = ''"PragmataPro Liga:Regular:15.0"'';
+      icon_font = ''"Font Awesome 5 Free:Solid:14.0"'';
       background_color = "0xff222222";
       foreground_color = "0xffd8dee9";
       space_icon_color = "0xffffab91";
@@ -63,7 +63,7 @@
       battery_icon_color = "0xffd8dee9";
       power_icon_strip = " ";
       space_icon = "•";
-      space_icon_strip = "1 2 3 4 5 6 7 8 9 10";
+      space_icon_strip = "I II III IV V VI VII VIII IX X";
       spaces_for_all_displays = "on";
       display_separator = "on";
       display_separator_icon = "";

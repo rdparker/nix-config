@@ -270,6 +270,22 @@
     },
     "nixpkgs_3": {
       "locked": {
+        "lastModified": 1616847335,
+        "narHash": "sha256-AQrNtJZRl9P78u+otHNXVxcQzu84vuTJLqynupp335g=",
+        "owner": "cmacrae",
+        "repo": "nixpkgs",
+        "rev": "7745d5338ad3c6cef295f40a732c6a739b1fcc7b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cmacrae",
+        "ref": "fix_spacebar",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_4": {
+      "locked": {
         "lastModified": 1613418107,
         "narHash": "sha256-UVG9gUzg9vZfmyLvz9pNUk1qxUWxHCZJWUULjlgxFTk=",
         "owner": "NixOS",
@@ -294,8 +310,27 @@
         "home-manager": "home-manager",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_2",
+        "spacebar": "spacebar",
         "stable": "stable",
         "treefmt": "treefmt"
+      }
+    },
+    "spacebar": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_3"
+      },
+      "locked": {
+        "lastModified": 1619609923,
+        "narHash": "sha256-nDnvmI4GZiBAR7oTWBw9ReQBGXz8W0X9z6DikeYa7Lw=",
+        "owner": "cmacrae",
+        "repo": "spacebar",
+        "rev": "ca4c58c05ff18a32dd5acc38d989d378fe13509b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cmacrae",
+        "repo": "spacebar",
+        "type": "github"
       }
     },
     "stable": {
@@ -319,7 +354,7 @@
         "devshell": "devshell_2",
         "flake-utils": "flake-utils_2",
         "naersk": "naersk",
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs_4"
       },
       "locked": {
         "lastModified": 1628955222,

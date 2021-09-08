@@ -20,6 +20,7 @@
     treefmt.url = "github:numtide/treefmt";
     emacs.url = "github:cmacrae/emacs";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
+    spacebar.url = "github:cmacrae/spacebar";
     comma = {
       url = "github:Shopify/comma";
       flake = false;
@@ -50,6 +51,7 @@
     , treefmt
     , emacs
     , emacs-overlay
+    , spacebar
     , flake-utils
     , ...
     }:
@@ -67,6 +69,7 @@
         devshell.overlay
         emacs.overlay
         emacs-overlay.overlay
+        spacebar.overlay
         (final: prev: {
           # expose stable packages via pkgs.stable
           stable = import stable {

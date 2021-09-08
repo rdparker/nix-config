@@ -70,6 +70,8 @@
         AppleShowScrollBars = "Automatic";
         # Save to iCloud by default
         NSDocumentSaveNewDocumentsToCloud = true;
+        # Autohide the system menu bar
+        _HIHideMenuBar = true;
       };
     };
 

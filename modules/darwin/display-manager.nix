@@ -34,6 +34,9 @@
     };
   };
 
+  launchd.user.agents.yabai.serviceConfig.StandardErrorPath = "/tmp/yabai.log";
+  launchd.user.agents.yabai.serviceConfig.StandardOutPath = "/tmp/yabai.log";
+
   services.skhd = {
     enable = true;
     package = pkgs.skhd;

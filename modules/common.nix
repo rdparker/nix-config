@@ -39,6 +39,7 @@
       git
       jq
       pstree
+      watch
 
       # helpful shell stuff
       bat

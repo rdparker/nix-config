@@ -51,7 +51,7 @@
       debug_output = "on";
       display = "main";
       position = "top";
-      clock_format = ''"%l:%M"'';
+      clock_format = ''"%l:%M %d"'';
       text_font = ''"PragmataPro Liga:Regular:15.0"'';
       icon_font = ''"Font Awesome 5 Free:Solid:14.0"'';
       background_color = "0xff222222";

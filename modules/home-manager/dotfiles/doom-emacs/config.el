@@ -1,5 +1,13 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
+;; Let flycheck know that variables and functions are defined by these modules.
+;; Doom Emacs loads them before loading this file.
+(require 'core)
+(require 'core-lib)
+(require 'core-modules)
+(require 'core-packages)
+(require 'core-ui)
+
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
@@ -35,9 +43,11 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 (use-package! theme-changer
-  :init (setq! calendar-location-name "North Carolina"
-               calendar-latitude 35
-               calendar-longitude -79)
+  :init
+  (declare-function change-theme "theme-changer")
+  (setq! calendar-location-name "North Carolina"
+         calendar-latitude 35
+         calendar-longitude -79)
   :config (change-theme 'doom-tomorrow-day 'doom-tomorrow-night))
 
 ;; If you use `org' and don't want your org files in the default location below,
@@ -46,7 +56,9 @@
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
+(use-package! display-line-numbers
+  :config
+  (setq display-line-numbers-type t))
 
 
 ;; Here are some additional functions/macros that could help you configure Doom:
@@ -69,3 +81,9 @@
       mac-option-modifier  'super)
 
 (setq sentence-end-double-space t)
+
+;; Since this is loaded rather than required, elisp checkdoc is not appropriate.
+;;
+;; Local Variables:
+;; flycheck-disabled-checkers: (emacs-lisp-checkdoc)
+;; End:

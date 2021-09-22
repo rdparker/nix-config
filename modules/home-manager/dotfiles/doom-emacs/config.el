@@ -67,3 +67,5 @@
 ;; they are implemented.
 (setq mac-command-modifier 'meta
       mac-option-modifier  'super)
+
+(setq sentence-end-double-space t)

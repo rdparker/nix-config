@@ -3,6 +3,7 @@
     casks = [
       "1password"
       "firefox-beta"
+      "iterm2"
       "karabiner-elements"
       "keepingyouawake"
       "kitty"

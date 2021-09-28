@@ -3,7 +3,8 @@
 # Remapped to work better on a Dvorak keyboard.
 
 # open terminal
-cmd + ctrl - t : /Applications/Kitty.app/Contents/MacOS/kitty --single-instance -d ~
+# cmd + ctrl - t : /Applications/Kitty.app/Contents/MacOS/kitty --single-instance -d ~
+cmd + ctrl - t : /Applications/iterm2.app
 
 # focus window
 alt - h : yabai -m window --focus west

@@ -137,7 +137,7 @@ in
         ];
         oh-my-zsh = {
           enable = true;
-          plugins = [ "git" "sudo" ];
+          plugins = [ "emacs" "git" "golang" "kubectl" "sudo" "tmux"];
         };
       };
     zoxide.enable = true;

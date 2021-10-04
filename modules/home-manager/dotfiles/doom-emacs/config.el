@@ -50,9 +50,30 @@
          calendar-longitude -79)
   :config (change-theme 'doom-tomorrow-day 'doom-tomorrow-night))
 
+;; Adapted from https://gist.github.com/adamczykm/c18b1dba01492adb403c301da0d3b7c1
+(defun my-directory-directories-recursively (dir &optional include-symlinks)
+    "Return a list of all subdirectories recursively. Returns absolute paths.
+Optionally call recursively on symlinks."
+    (let ((result nil)
+          (tramp-mode (and tramp-mode (file-remote-p (expand-file-name dir)))))
+      (dolist (file (file-name-all-completions "" dir))
+        (when (and (directory-name-p file) (not (member file '("./" "../"))))
+          (setq result (nconc result (list (expand-file-name file dir))))
+          (let* ((leaf (substring file 0 (1- (length file))))
+                 (full-file (expand-file-name leaf dir)))
+            ;; Don't follow symlinks to other directories.
+            (unless (and (file-symlink-p full-file) (not include-symlinks))
+              (setq result
+                    (nconc result (my-directory-directories-recursively full-file)))))
+          ))
+      result))
+
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
+(setq org-agenda-files
+      (cons org-directory
+            (my-directory-directories-recursively org-directory)))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.

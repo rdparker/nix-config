@@ -70,10 +70,35 @@ Optionally call recursively on symlinks."
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+(setq org-directory "~/org/"
+      ;; org-agenda-include-diary t
+      diary-file (expand-file-name "diary" org-directory))
 (setq org-agenda-files
       (cons org-directory
             (my-directory-directories-recursively org-directory)))
+;; Use a customized org-mac-iCal that supports Exchange calendars and newer versions of macOS
+(add-load-path! (expand-file-name "local/org-mac-iCal" doom-private-dir))
+(when IS-MAC
+  (after! org
+    (add-to-list 'org-modules 'org-mac-iCal)
+    (setq org-mac-iCal-import-exchange t)))
+;; From Worg: A common problem with all-day and multi-day events in org agenda
+;; view is that they become separated from timed events and are placed below all
+;; TODO items. Likewise, additional fields such as Location: are orphaned from
+;; their parent events. The following hook will ensure that all events are
+;; correctly placed in the agenda:
+(add-hook 'org-agenda-cleanup-fancy-diary-hook
+          (lambda ()
+            (goto-char (point-min))
+            (save-excursion
+              (while (re-search-forward "^[a-z]" nil t)
+                (goto-char (match-beginning 0))
+                (insert "0:00-24:00 ")))
+            (while (re-search-forward "^ [a-z]" nil t)
+              (goto-char (match-beginning 0))
+              (save-excursion
+                (re-search-backward "^[0-9]+:[0-9]+-[0-9]+:[0-9]+ " nil t))
+              (insert (match-string 0)))))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.

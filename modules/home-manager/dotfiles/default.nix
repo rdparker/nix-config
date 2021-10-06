@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, inputs, ... }: {
   home.file = {
     doom = {
       source = ./doom-emacs;
@@ -8,6 +8,11 @@
     keras = {
       source = ./keras;
       target = ".keras";
+      recursive = true;
+    };
+    org-mac-iCal = with inputs; {
+      source = org-mac-iCal;
+      target = ".doom.d/local/org-mac-iCal";
       recursive = true;
     };
     raycast = {

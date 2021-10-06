@@ -298,6 +298,22 @@
         "type": "indirect"
       }
     },
+    "org-mac-iCal": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1606428755,
+        "narHash": "sha256-35T7MrShqGO+fFrvhooS0ASV8fwQ9V+OUAIZgzEkAKM=",
+        "owner": "terjesannum",
+        "repo": "org-mac-iCal",
+        "rev": "0afa91b3b07b851ed06fa5dd5edf80fb23768920",
+        "type": "github"
+      },
+      "original": {
+        "owner": "terjesannum",
+        "repo": "org-mac-iCal",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "comma": "comma",
@@ -310,6 +326,7 @@
         "home-manager": "home-manager",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_2",
+        "org-mac-iCal": "org-mac-iCal",
         "spacebar": "spacebar",
         "stable": "stable",
         "treefmt": "treefmt"

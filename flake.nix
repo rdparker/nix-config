@@ -38,6 +38,10 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    org-mac-iCal = {
+      url = "github:terjesannum/org-mac-iCal";
+      flake = false;
+    };
   };
 
   outputs =
@@ -130,6 +134,7 @@
         , system ? "x86_64-linux"
         , baseModules ? [ ./modules/home-manager ]
         , extraModules ? [ ]
+        , orgMacICal ? inputs.org-mac-iCal
         }:
         homeManagerConfiguration rec {
           inherit system username;

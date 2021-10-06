@@ -34,6 +34,7 @@ in
     brews = [
       "beeftornado/rmtree/brew-rmtree"
       "mas"
+      "pngpaste"                        # Used for Org drag and drop
       "teamookla/speedtest/speedtest"
     ];
 

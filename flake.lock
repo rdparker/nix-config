@@ -301,15 +301,15 @@
     "org-mac-iCal": {
       "flake": false,
       "locked": {
-        "lastModified": 1606428755,
-        "narHash": "sha256-35T7MrShqGO+fFrvhooS0ASV8fwQ9V+OUAIZgzEkAKM=",
-        "owner": "terjesannum",
+        "lastModified": 1633557110,
+        "narHash": "sha256-1FzY6zpLFwZgLsg+cXsSau4ghAtfrg1ky/PTWB8CDVc=",
+        "owner": "rdparker",
         "repo": "org-mac-iCal",
-        "rev": "0afa91b3b07b851ed06fa5dd5edf80fb23768920",
+        "rev": "f2311c82aa87ddd217a477b060f4b84b62fa9171",
         "type": "github"
       },
       "original": {
-        "owner": "terjesannum",
+        "owner": "rdparker",
         "repo": "org-mac-iCal",
         "type": "github"
       }

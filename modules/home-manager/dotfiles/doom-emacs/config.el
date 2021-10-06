@@ -72,7 +72,8 @@ Optionally call recursively on symlinks."
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/"
       ;; org-agenda-include-diary t
-      diary-file (expand-file-name "diary" org-directory))
+      diary-file (expand-file-name "diary" org-directory)
+      org-mac-iCal-file (concat diary-file ".org"))
 (setq org-agenda-files
       (cons org-directory
             (my-directory-directories-recursively org-directory)))

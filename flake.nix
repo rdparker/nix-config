@@ -39,7 +39,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     org-mac-iCal = {
-      url = "github:terjesannum/org-mac-iCal";
+      url = "github:rdparker/org-mac-iCal";
       flake = false;
     };
   };

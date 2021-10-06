@@ -48,6 +48,7 @@
       ispell
       ripgrep
       shellcheck
+      tmux
       zsh
     ];
     etc = {

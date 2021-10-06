@@ -7,6 +7,7 @@
       "karabiner-elements"
       "keepingyouawake"
       "kitty"
+      "microsoft-edge"
       "raycast"
       "visual-studio-code"
     ];

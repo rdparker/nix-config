@@ -51,13 +51,16 @@
   :config (change-theme 'doom-tomorrow-day 'doom-tomorrow-night))
 
 ;; Adapted from https://gist.github.com/adamczykm/c18b1dba01492adb403c301da0d3b7c1
-(defun my-directory-directories-recursively (dir &optional include-symlinks)
+(defun my-directory-directories-recursively (dir &optional exclusions include-symlinks)
     "Return a list of all subdirectories recursively. Returns absolute paths.
-Optionally call recursively on symlinks."
+Optionally ignore excluded directories and call recursively on symlinks."
     (let ((result nil)
           (tramp-mode (and tramp-mode (file-remote-p (expand-file-name dir)))))
+      (dolist (exclusion '("./" "../"))
+        (when (not (member exclusion exclusions))
+          (setq exclusions (cons exclusion exclusions))))
       (dolist (file (file-name-all-completions "" dir))
-        (when (and (directory-name-p file) (not (member file '("./" "../"))))
+        (when (and (directory-name-p file) (not (member file exclusions)))
           (setq result (nconc result (list (expand-file-name file dir))))
           (let* ((leaf (substring file 0 (1- (length file))))
                  (full-file (expand-file-name leaf dir)))
@@ -76,7 +79,7 @@ Optionally call recursively on symlinks."
       org-mac-iCal-file (concat diary-file ".org"))
 (setq org-agenda-files
       (cons org-directory
-            (my-directory-directories-recursively org-directory)))
+            (my-directory-directories-recursively org-directory '(".attach/"))))
 ;; Use a customized org-mac-iCal that supports Exchange calendars and newer versions of macOS
 (add-load-path! (expand-file-name "local/org-mac-iCal" doom-private-dir))
 (when IS-MAC

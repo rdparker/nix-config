@@ -28,6 +28,7 @@ in
       "homebrew/cask-versions"
       "homebrew/core"
       "homebrew/services"
+      "mczachurski/wallpapper"
       "teamookla/speedtest"
     ];
 
@@ -36,12 +37,16 @@ in
       "mas"
       "pngpaste"                        # Used for Org drag and drop
       "teamookla/speedtest/speedtest"
+      "wallpapper"              # Tools fro creating dynamic wallpapers
     ];
 
     casks = [
       "goland"
       "iglance"
       "rider"
+      "xquartz"                 # Needed by mcgimp
+      "gimp"                    # Stable, up-to-date Gimp
+      "mcgimp"                  # Gimp with plugins
     ];
   };
 }

@@ -150,6 +150,202 @@ This is to be used as :around advice for
               (org-mac-iCal)
               (org-agenda-redo-all))))
 
+(after! icalendar
+  ;;; Modified to use the entries UID to avoid duplicates.
+  ;;;
+  ;;; FIXME: Perhaps include LAST-MODIFIED logic in this although it is not
+  ;;; included in all event records.
+  (defun icalendar--convert-ical-to-diary (ical-list diary-filename
+                                                     &optional do-not-ask
+                                                     non-marking)
+    "Convert iCalendar data to an Emacs diary file.
+Import VEVENTS from the iCalendar object ICAL-LIST and saves them to a
+DIARY-FILENAME.  If DO-NOT-ASK is nil the user is asked for each event
+whether to actually import it.  NON-MARKING determines whether diary
+events are created as non-marking.
+This function attempts to return t if something goes wrong.  In this
+case an error string which describes all the errors and problems is
+written into the buffer `*icalendar-errors*'."
+    (let* ((ev (icalendar--all-events ical-list))
+           (error-string "")
+           (event-ok t)
+           (found-error nil)
+           (zone-map (icalendar--convert-all-timezones ical-list))
+           e diary-string uids)
+      ;; step through all events/appointments
+      (while ev
+        (setq e (car ev))
+        (setq ev (cdr ev))
+        (setq event-ok nil)
+        (condition-case error-val
+            (let* ((uid (icalendar--get-event-property e 'UID))
+                   (dtstart (icalendar--get-event-property e 'DTSTART))
+                   (dtstart-zone (icalendar--find-time-zone
+ 				  (icalendar--get-event-property-attributes
+ 				   e 'DTSTART)
+ 				  zone-map))
+                   (dtstart-dec (icalendar--decode-isodatetime dtstart nil
+                                                               dtstart-zone))
+                   (start-d (icalendar--datetime-to-diary-date
+                             dtstart-dec))
+                   (start-t (and dtstart
+                                 (> (length dtstart) 8)
+                                 (icalendar--datetime-to-colontime dtstart-dec)))
+                   (dtend (icalendar--get-event-property e 'DTEND))
+                   (dtend-zone (icalendar--find-time-zone
+ 			        (icalendar--get-event-property-attributes
+ 			         e 'DTEND)
+ 			        zone-map))
+                   (dtend-dec (icalendar--decode-isodatetime dtend
+                                                             nil dtend-zone))
+                   (dtend-1-dec (icalendar--decode-isodatetime dtend -1
+                                                               dtend-zone))
+                   end-d
+                   end-1-d
+                   end-t
+                   (summary (icalendar--convert-string-for-import
+                             (or (icalendar--get-event-property e 'SUMMARY)
+                                 "No summary")))
+                   (rrule (icalendar--get-event-property e 'RRULE))
+                   (rdate (icalendar--get-event-property e 'RDATE))
+                   (duration (icalendar--get-event-property e 'DURATION)))
+              ;; Process an event if it does not have a UID or if its UID has
+              ;; not been seen before.
+              (when (not (member uid uids))
+                (when uid (push uid uids))
+                (icalendar--dmsg "%s: `%s'" start-d summary)
+                ;; check whether start-time is missing
+                (if  (and dtstart
+                          (string=
+                           (cadr (icalendar--get-event-property-attributes
+                                  e 'DTSTART))
+                           "DATE"))
+                    (setq start-t nil))
+                (when duration
+                  (let ((dtend-dec-d (icalendar--add-decoded-times
+                                      dtstart-dec
+                                      (icalendar--decode-isoduration duration)))
+                        (dtend-1-dec-d (icalendar--add-decoded-times
+                                        dtstart-dec
+                                        (icalendar--decode-isoduration duration
+                                                                       t))))
+                    (if (and dtend-dec (not (eq dtend-dec dtend-dec-d)))
+                        (message "Inconsistent endtime and duration for %s"
+                                 summary))
+                    (setq dtend-dec dtend-dec-d)
+                    (setq dtend-1-dec dtend-1-dec-d)))
+                (setq end-d (if dtend-dec
+                                (icalendar--datetime-to-diary-date dtend-dec)
+                              start-d))
+                (setq end-1-d (if dtend-1-dec
+                                  (icalendar--datetime-to-diary-date dtend-1-dec)
+                                start-d))
+                (setq end-t (if (and
+                                 dtend-dec
+                                 (not (string=
+                                       (cadr
+                                        (icalendar--get-event-property-attributes
+                                         e 'DTEND))
+                                       "DATE")))
+                                (icalendar--datetime-to-colontime dtend-dec)))
+                (icalendar--dmsg "start-d: %s, end-d: %s" start-d end-d)
+                (cond
+                 ;; recurring event
+                 (rrule
+                  (setq diary-string
+                        (icalendar--convert-recurring-to-diary e dtstart-dec start-t
+                                                               end-t))
+                  (setq event-ok t))
+                 (rdate
+                  (icalendar--dmsg "rdate event")
+                  (setq diary-string "")
+                  (mapc (lambda (_datestring)
+		          (setq diary-string
+			        (concat diary-string
+				        (format "......"))))
+		        (icalendar--split-value rdate)))
+                 ;; non-recurring event
+                 ;; all-day event
+                 ((not (string= start-d end-d))
+                  (setq diary-string
+                        (icalendar--convert-non-recurring-all-day-to-diary
+                         start-d end-1-d))
+                  (setq event-ok t))
+                 ;; not all-day
+                 ((and start-t (or (not end-t)
+                                   (not (string= start-t end-t))))
+                  (setq diary-string
+                        (icalendar--convert-non-recurring-not-all-day-to-diary
+                         dtstart-dec start-t end-t))
+                  (setq event-ok t))
+                 ;; all-day event
+                 (t
+                  (icalendar--dmsg "all day event")
+                  (setq diary-string (icalendar--datetime-to-diary-date
+                                      dtstart-dec "/"))
+                  (setq event-ok t)))
+                ;; add all other elements unless the user doesn't want to have
+                ;; them
+                (if event-ok
+                    (progn
+                      (setq diary-string
+                            (concat diary-string " "
+                                    (icalendar--format-ical-event e)))
+                      (if do-not-ask (setq summary nil))
+                      ;; add entry to diary and store actual name of diary
+                      ;; file (in case it was nil)
+                      (setq diary-filename
+                            (icalendar--add-diary-entry diary-string diary-filename
+                                                        non-marking summary)))
+                  ;; event was not ok
+                  (setq found-error t)
+                  (setq error-string
+                        (format "%s\nCannot handle this event:%s"
+                                error-string e)))))
+          ;; FIXME: inform user about ignored event properties
+          ;; handle errors
+          (error
+           (message "Ignoring event \"%s\"" e)
+           (setq found-error t)
+           (setq error-string (format "%s\n%s\nCannot handle this event: %s"
+                                      error-val error-string e))
+           (message "%s" error-string))))
+
+      ;; insert final newline
+      (if diary-filename
+          (let ((b (find-buffer-visiting diary-filename)))
+            (when b
+              (save-current-buffer
+                (set-buffer b)
+                (goto-char (point-max))
+                (insert "\n")))))
+      (if found-error
+          (save-current-buffer
+            (set-buffer (get-buffer-create "*icalendar-errors*"))
+            (erase-buffer)
+            (insert error-string)))
+      (message "Converting iCalendar...done")
+      found-error))
+
+  ;;; Modified to output %%(diary-date...) entries
+  (defun icalendar--convert-non-recurring-not-all-day-to-diary (dtstart-dec
+                                                                start-t
+                                                                end-t)
+    "Convert recurring icalendar EVENT to diary format.
+
+DTSTART-DEC is the decoded DTSTART property of E.
+START-T is the event's start time in diary format.
+END-T is the event's end time in diary format."
+    (icalendar--dmsg "not all day event")
+    (cond (end-t
+           (format "%%%%(diary-date %s) %s-%s"
+                   (icalendar--datetime-to-diary-date dtstart-dec)
+                   start-t end-t))
+          (t
+           (format "%%%%(diary-date %s) %s"
+                   (icalendar--datetime-to-diary-date dtstart-dec)
+                   start-t)))))
+
 ;; From Worg: A common problem with all-day and multi-day events in org agenda
 ;; view is that they become separated from timed events and are placed below all
 ;; TODO items. Likewise, additional fields such as Location: are orphaned from

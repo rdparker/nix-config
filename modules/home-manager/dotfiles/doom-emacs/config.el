@@ -85,6 +85,12 @@ Optionally ignore excluded directories and call recursively on symlinks."
             (my-directory-directories-recursively org-directory '(".attach/"))))
 ;; Use a customized org-mac-iCal that supports Exchange calendars and newer versions of macOS
 (add-load-path! (expand-file-name "local/org-mac-iCal" doom-private-dir))
+
+;; Work around Doom Emacs issue 3426, "configure org-mode agenda view "stuck
+;; projects", https://github.com/hlissner/doom-emacs/issues/3426.
+(setq! org-stuck-projects
+       '("+LEVEL=2-FILE={\\<journal\\.org\\>}/-DONE" ("TODO" "NEXT" "NEXTACTION") nil ""))
+
 (when IS-MAC
   (after! org
     (add-to-list 'org-modules 'org-mac-iCal)

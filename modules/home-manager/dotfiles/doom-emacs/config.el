@@ -95,10 +95,18 @@ Optionally ignore excluded directories and call recursively on symlinks."
 ;; (setq! org-agenda-span 1
 ;;        org-agenda-start-day "today")
 
+;; Setup importing agenda items from macOS Calendar.app.
 (when IS-MAC
-  (after! org
     (add-to-list 'org-modules 'org-mac-iCal)
-    (setq org-mac-iCal-import-exchange t)))
+    (setq! org-mac-iCal-import-exchange t)
+
+    ;; Rebind ?i in agenda buffers to update from Calendar.app and redisplay.
+    (map! :after org-agenda
+        :map org-agenda-mode-map
+        "i" (lambda ()
+              (org-mac-iCal)
+              (org-agenda-redo-all))))
+
 ;; From Worg: A common problem with all-day and multi-day events in org agenda
 ;; view is that they become separated from timed events and are placed below all
 ;; TODO items. Likewise, additional fields such as Location: are orphaned from

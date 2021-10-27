@@ -132,7 +132,16 @@ This is to be used as :around advice for
 ;; Work around Doom Emacs issue 3426, "configure org-mode agenda view "stuck
 ;; projects", https://github.com/hlissner/doom-emacs/issues/3426.
 (setq! org-stuck-projects
-       '("+LEVEL=2-FILE={\\<journal\\.org\\>}/-DONE" ("TODO" "NEXT" "NEXTACTION") nil ""))
+       '(
+         ;; Project identifier
+         ;; "/+LEVEL=2-FILE={\\<journal\\.org\\>}+PROJ/-DONE-KILL-[X]-OKAY-YES-NO" ("TODO" "NEXT" "NEXTACTION") nil ""))
+         "ITEM={Tasks}+Level=2|+TODO=\"PROJ\"|escalation+Level=2"
+         ;; Non-stuck TODO keywords
+         ("TODO" "STRT" "\[ ]" "[-]")
+         ;; Non-stuck :tags:
+         nil
+         ;; Regex matching non-stuck projects
+         ""))
 
 ;; Shift the agenda to show today by default
 ;; (setq! org-agenda-span 1

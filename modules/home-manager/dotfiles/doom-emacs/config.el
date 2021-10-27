@@ -86,6 +86,49 @@ Optionally ignore excluded directories and call recursively on symlinks."
 ;; Use a customized org-mac-iCal that supports Exchange calendars and newer versions of macOS
 (add-load-path! (expand-file-name "local/org-mac-iCal" doom-private-dir))
 
+;; Fix up iCalendar importing of .ics files that do not have a VTIMEZONE
+;; entry by creating a custom zone map and advising the
+;; `icalendar--find-time-function function.
+(defvar my-zone-map
+  '(("America/Los_Angeles" .
+     "STD+08:00DST+07:00,M3.2.0/02:00:00,M11.1.0/02:00:00")
+    ("Pacific Time" .
+     "STD+08:00DST+07:00,M3.2.0/02:00:00,M11.1.0/02:00:00")
+    ("Pacific Time (US & Canada)" .
+     "STD+08:00DST+07:00,M3.2.0/02:00:00,M11.1.0/02:00:00")
+    ("America/Denver" .
+     "STD+07:00DST+06:00,M3.2.0/02:00:00,M11.1.0/02:00:00")
+    ("America/Chicago" .
+     "STD+06:00DST+05:00,M3.2.0/02:00:00,M11.1.0/02:00:00")
+    ("America/New_York" .
+     "STD+05:00DST+04:00,M3.2.0/02:00:00,M11.1.0/02:00:00")
+    ("Asia/Calcutta" .
+     "STD-05:30")
+    ("India Standard Time" .
+     "STD-05:30")
+    ("Asia/Colombo" .
+     "STD-05:30")
+    ("Europe/Berlin" .
+     "STD-01:00DST-02:00,M3.5.0/02:00:00,M10.5.0/03:00:00"))
+  "Custom defined timezone strings.
+These may be used by my custom `icalendar--find-time-zone`
+implementation when a timezone is not defined in a VTIMEZONE
+entry in the iCalendar file.")
+
+(defun my-find-unmatched-time-zones (orig-fun &rest args)
+  "Checks `my-zone-map when a timezone id is not found.
+This is to be used as :around advice for
+`icalendar--find-time-zone."
+  (or (apply orig-fun args)
+      (let ((id (plist-get (car args) 'TZID)))
+        (if id
+            (let ((tzstr (cdr (assoc id my-zone-map))))
+              (unless tzstr
+                (message "No timezone definition found for \"%s\"" id))
+              tzstr)))))
+
+(advice-add 'icalendar--find-time-zone :around #'my-find-unmatched-time-zones)
+
 ;; Work around Doom Emacs issue 3426, "configure org-mode agenda view "stuck
 ;; projects", https://github.com/hlissner/doom-emacs/issues/3426.
 (setq! org-stuck-projects

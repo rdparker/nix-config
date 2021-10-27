@@ -76,13 +76,13 @@ Optionally ignore excluded directories and call recursively on symlinks."
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/"
-      ;; org-agenda-include-diary t
-      diary-file (expand-file-name "diary" org-directory)
-      org-mac-iCal-file (concat diary-file ".org"))
-(setq org-agenda-files
-      (cons org-directory
-            (my-directory-directories-recursively org-directory '(".attach/"))))
+(setq! org-directory "~/org/"
+       diary-file (expand-file-name "diary" org-directory)
+       org-mac-iCal-file (concat diary-file ".org")
+       org-agenda-files (cons org-directory
+                              (my-directory-directories-recursively
+                               org-directory '(".attach/"))))
+
 ;; Use a customized org-mac-iCal that supports Exchange calendars and newer versions of macOS
 (add-load-path! (expand-file-name "local/org-mac-iCal" doom-private-dir))
 
@@ -90,6 +90,10 @@ Optionally ignore excluded directories and call recursively on symlinks."
 ;; projects", https://github.com/hlissner/doom-emacs/issues/3426.
 (setq! org-stuck-projects
        '("+LEVEL=2-FILE={\\<journal\\.org\\>}/-DONE" ("TODO" "NEXT" "NEXTACTION") nil ""))
+
+;; Shift the agenda to show today by default
+;; (setq! org-agenda-span 1
+;;        org-agenda-start-day "today")
 
 (when IS-MAC
   (after! org

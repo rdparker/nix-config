@@ -152,12 +152,17 @@ This is to be used as :around advice for
     (add-to-list 'org-modules 'org-mac-iCal)
     (setq! org-mac-iCal-import-exchange t)
 
+    (defun org-mac-iCal-refresh-agenda ()
+      "Update the iCalendar diary and update the agenda view.
+
+This is meant to be used as a key binding in the agenda window."
+      (interactive)
+      (org-mac-iCal)
+      (org-agenda-redo-all))
     ;; Rebind ?i in agenda buffers to update from Calendar.app and redisplay.
     (map! :after org-agenda
         :map org-agenda-mode-map
-        "i" (lambda ()
-              (org-mac-iCal)
-              (org-agenda-redo-all))))
+        "i" #'org-mac-iCal-refresh-agenda))
 
 (after! icalendar
   ;;; Modified to use the entries UID to avoid duplicates.

@@ -38,6 +38,9 @@
 ;; Setup the avy keys for jumping to links and things for Dvorak.
 (setq! avy-keys '(?a ?o ?e ?u ?i ?d ?h ?t ?n ?s))
 
+;;; Elide copyright headings
+(add-hook! find-file #'elide-head)
+
 ;;; Org to Confluence exporter
 (after! ox
   (use-package! ox-confluence))

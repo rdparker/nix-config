@@ -51,6 +51,7 @@ in
 
     masApps = {
       "Xcode" = 497799835;      # Needed by wallpapper in apps.nix
+      "Microsoft Remote Desktop" = 1295203466;
     };
   };
 }

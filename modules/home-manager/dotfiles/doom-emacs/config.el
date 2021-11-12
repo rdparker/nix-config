@@ -381,6 +381,49 @@ END-T is the event's end time in diary format."
                 (re-search-backward "^[0-9]+:[0-9]+-[0-9]+:[0-9]+ " nil t))
               (insert (match-string 0)))))
 
+(use-package! org-super-agenda
+  :after org-agenda
+  :init
+  (setq! org-super-agenda-groups
+         '((:name "Today"
+            :time-grid t  ; Items that appear on the time grid
+            :date today
+            :order 1)
+
+           ;; Place less-important todos at the bottom regardless of their Org
+           ;; priority.  This prevents priority A and B items with a waiting
+           ;; state from being listed in the high-priority section.
+           (:name "Waiting" :todo "WAIT" :todo "\[?\]" :order 98)
+           (:todo ("HOLD" "IDEA") :order 100)
+
+           (:name "Important"
+            :priority<= "B"
+            ;; Show this section after "Today"
+            :order 2)
+
+           (:name none
+            ;; Pick up all-day items and show them before the time grid
+            :category "diary"
+            :order 0)
+           (:name "Escalations"
+            :file-path "/Escalations/"
+            :order 3)
+           (:name "Burts"
+            :file-path "/Burts/"
+            :order 4)
+           (:name "Due soon"
+            :deadline future
+            :order 5)
+           (:name "Scheduled earlier"
+            :scheduled past
+            :order 6)
+           ;; After the last group, the agenda will display items that didn't
+           ;; match any of these groups, with the default order position of 99
+           ))
+
+  :config
+  (org-super-agenda-mode))
+
 ;; Make sure the correct emacsclient can be found when using a nix-provided Emacs.
 ;;
 ;; This addresses the following error:

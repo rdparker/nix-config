@@ -31,8 +31,8 @@
 ;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
 (setq doom-font "PragmataPro Liga-14"
-      doom-variable-pitch-font "Fira Sans"
-      doom-serif-font "Fira Code"
+      doom-variable-pitch-font "Fira Sans" ; "Maven Pro"
+      doom-serif-font "Lora" ; Alegreya" ; "Fira Code"
       doom-unicode-font "PragmataPro Liga-14")
 
 ;; Setup the avy keys for jumping to links and things for Dvorak.

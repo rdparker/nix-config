@@ -107,9 +107,7 @@ in
       in
       {
         enable = true;
-        # Used as a temporary workaround while fixing the conflict with nix-2.4.
-        # https://github.com/NixOS/nix/issues/5445
-        enableCompletion = false;
+        enableCompletion = true;
         autocd = true;
         dotDir = ".config/zsh";
         localVariables = {
@@ -130,9 +128,7 @@ in
         '';
         plugins = with pkgs; [
           (mkZshPlugin { pkg = zsh-autopair; })
-          # Temporarily disabled while working around a conflict with nix-2.4,
-          # cf. https://github.com/NixOS/nix/issues/5445.
-          # (mkZshPlugin { pkg = zsh-completions; })
+          (mkZshPlugin { pkg = zsh-completions; })
           (mkZshPlugin { pkg = zsh-autosuggestions; })
           (mkZshPlugin {
             pkg = zsh-fast-syntax-highlighting;

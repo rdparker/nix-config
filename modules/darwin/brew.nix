@@ -47,6 +47,7 @@ in
       "xquartz"                 # Needed by mcgimp
       "gimp"                    # Stable, up-to-date Gimp
       "mcgimp"                  # Gimp with plugins
+      "powershell"
     ];
 
     masApps = {

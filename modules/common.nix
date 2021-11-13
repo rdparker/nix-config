@@ -28,29 +28,30 @@
 
   # environment setup
   environment = {
-    systemPackages = with pkgs; [
-      # editors
-      emacs
+    systemPackages = with pkgs;
+      [
+        # editors
+        emacs
 
-      # standard toolset
-      coreutils
-      curl
-      wget
-      git
-      jq
-      multitail
-      pstree
-      watch
+        # standard toolset
+        coreutils
+        curl
+        wget
+        git
+        jq
+        multitail
+        pstree
+        watch
 
-      # helpful shell stuff
-      bat
-      fzf
-      ispell
-      ripgrep
-      shellcheck
-      tmux
-      zsh
-    ];
+        # helpful shell stuff
+        bat
+        fzf
+        ispell
+        ripgrep
+        shellcheck
+        tmux
+        zsh
+      ];
     etc = {
       home-manager.source = "${inputs.home-manager}";
       nixpkgs.source = "${inputs.nixpkgs}";
@@ -59,5 +60,11 @@
     shells = with pkgs; [ bash zsh fish ];
   };
 
-  fonts.fonts = with pkgs; [ emacs-all-the-icons-fonts fira fira-code font-awesome jetbrains-mono ];
+  fonts.fonts = with pkgs; [
+    emacs-all-the-icons-fonts
+    fira
+    fira-code
+    font-awesome
+    jetbrains-mono
+  ];
 }

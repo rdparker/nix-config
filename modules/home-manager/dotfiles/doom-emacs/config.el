@@ -11,6 +11,33 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
+;; Make sure the correct emacsclient can be found when using a nix-provided Emacs.
+;;
+;; This addresses the following error:
+;;
+;;    Warning (with-editor): Cannot determine a suitable Emacsclient
+;;
+;;    Determining an Emacsclient executable suitable for the
+;;    current Emacs instance failed.  For more information
+;;    please see https://github.com/magit/magit/wiki/Emacsclient.
+;;
+;; which is due to the bin directory for the nix-installed version of Emacs not
+;; appearing in `exec-path'.
+(load-library "subr")
+
+;; If path is a nix store libexec path and there is not a matching nix store bin
+;; path, add one before the libexec path.  Adding it before, preserves the
+;; special behavior of the final `exec-path` entry, even in the case where the
+;; libexec path is the last one in the list.
+(setq exec-path
+      (mapcan (lambda (path)
+                (if (string-match "^/nix/store/[^/]*/libexec" path)
+                    (let ((bin-path (replace-regexp-in-string "/libexec/.*" "/bin" path)))
+                      (if (and (not (member bin-path exec-path))
+                               (file-directory-p bin-path))
+                          (list bin-path path)
+                        (list path)))
+                  (list path))) exec-path))
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
@@ -423,33 +450,6 @@ END-T is the event's end time in diary format."
 
   :config
   (org-super-agenda-mode))
-
-;; Make sure the correct emacsclient can be found when using a nix-provided Emacs.
-;;
-;; This addresses the following error:
-;;
-;;    Warning (with-editor): Cannot determine a suitable Emacsclient
-;;
-;;    Determining an Emacsclient executable suitable for the
-;;    current Emacs instance failed.  For more information
-;;    please see https://github.com/magit/magit/wiki/Emacsclient.
-;;
-;; which is due to the bin directory for the nix-installed version of Emacs not
-;; appearing in `exec-path'.
-(after! with-editor
-  ; If path is a nix store libexec path and there is not a matching nix store
-  ; bin path, add one before the libexec path.  Adding it before, preserves the
-  ; special behavior of the final `exec-path` entry, even in the case where the
-  ; libexec path is the last one in the list.
-  (setq exec-path
-        (mapcan (lambda (path)
-                  (if (string-match "^/nix/store/[^/]*/libexec" path)
-                      (let ((bin-path (s-replace-regexp "/libexec/.*" "/bin" path)))
-                        (if (and (not (member bin-path exec-path))
-                                 (file-directory-p bin-path))
-                            (list bin-path path)
-                          (list path)))
-                    (list path))) exec-path)))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.

@@ -395,18 +395,19 @@ END-T is the event's end time in diary format."
 ;; TODO items. Likewise, additional fields such as Location: are orphaned from
 ;; their parent events. The following hook will ensure that all events are
 ;; correctly placed in the agenda:
-(add-hook 'org-agenda-cleanup-fancy-diary-hook
-          (lambda ()
-            (goto-char (point-min))
-            (save-excursion
-              (while (re-search-forward "^[a-z]" nil t)
-                (goto-char (match-beginning 0))
-                (insert "0:00-24:00 ")))
-            (while (re-search-forward "^ [a-z]" nil t)
-              (goto-char (match-beginning 0))
-              (save-excursion
-                (re-search-backward "^[0-9]+:[0-9]+-[0-9]+:[0-9]+ " nil t))
-              (insert (match-string 0)))))
+(add-hook! org-agenda-cleanup-fancy-diary-hook
+  (lambda ()
+    (goto-char (point-min))
+    (save-excursion
+      (while (re-search-forward "^[a-z]" nil t)
+        (goto-char (match-beginning 0))
+        (insert "0:00-24:00 ")))
+    (while (re-search-forward "^ [a-z]" nil t)
+      (goto-char (match-beginning 0))
+      (save-excursion
+        (re-search-backward "^[0-9]+:[0-9]+-[0-9]+:[0-9]+ " nil t))
+      (insert (match-string 0)))))
+(add-hook! org-mode #'flyspell-mode)
 
 (use-package! org-super-agenda
   :after org-agenda

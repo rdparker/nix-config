@@ -23,7 +23,7 @@ let
   aliases = { };
 in
 {
-  home.packages = with pkgs; [ tree ];
+  home.packages = with pkgs; [ pandoc tree ];
   programs = {
     direnv = {
       enable = true;

@@ -2,10 +2,14 @@
   description = "nix system configurations";
 
   nixConfig = {
-    substituters =
-      [ "https://kclejeune.cachix.org" "https://nix-community.cachix.org/" ];
+    substituters = [
+      "https://cachix.org/api/v1/cache/emacs"
+      "https://kclejeune.cachix.org"
+      "https://nix-community.cachix.org/"
+    ];
 
     trusted-public-keys = [
+      "emacs.cachix.org-1:b1SMJNLY/mZF6GxQE+eDBeps7WnkT0Po55TAyzwOxTY="
       "kclejeune.cachix.org-1:fOCrECygdFZKbMxHClhiTS6oowOkJ/I/dh9q9b1I4ko="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     ];

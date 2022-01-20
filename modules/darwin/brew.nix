@@ -28,6 +28,7 @@ in
       "homebrew/cask-versions"
       "homebrew/core"
       "homebrew/services"
+      "koekeishiya/formulae"
       "teamookla/speedtest"
       "mczachurski/wallpapper"
     ];
@@ -55,5 +56,9 @@ in
       "Owly" = 882812218;
       "Xcode" = 497799835;      # Needed by wallpapper in apps.nix
     };
+
+    extraConfig = ''
+      brew "koekeishiya/formulae/yabai", args: ["HEAD"], restart_service: :changed
+    '';
   };
 }

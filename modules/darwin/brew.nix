@@ -50,6 +50,8 @@ in
       "gimp"                    # Stable, up-to-date Gimp
       "mcgimp"                  # Gimp with plugins
       "powershell"
+      "wireshark"
+      "zenmap"
     ];
 
     masApps = {

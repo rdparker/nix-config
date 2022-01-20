@@ -15,6 +15,7 @@ in
   homebrew = {
     enable = true;
     autoUpdate = true;
+    cleanup = "uninstall";
     global = {
       brewfile = true;
       noLock = true;

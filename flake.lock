@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "chemacs2": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1621609489,
+        "narHash": "sha256-uAEAu7RJdxRKMn51eTytGO4KPMy5IolOS5Ow3oxS5L0=",
+        "owner": "plexus",
+        "repo": "chemacs2",
+        "rev": "ef82118824fac2b2363d3171d26acbabe1738326",
+        "type": "github"
+      },
+      "original": {
+        "owner": "plexus",
+        "repo": "chemacs2",
+        "type": "github"
+      }
+    },
     "comma": {
       "flake": false,
       "locked": {
@@ -316,6 +332,7 @@
     },
     "root": {
       "inputs": {
+        "chemacs2": "chemacs2",
         "comma": "comma",
         "darwin": "darwin",
         "devshell": "devshell",

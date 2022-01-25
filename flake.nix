@@ -42,6 +42,12 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Emacs-related inputs
+    chemacs2 = {
+      url = "github:plexus/chemacs2";
+      flake = false;
+    };
     org-mac-iCal = {
       url = "github:rdparker/org-mac-iCal";
       flake = false;
@@ -139,6 +145,7 @@
         , baseModules ? [ ./modules/home-manager ]
         , extraModules ? [ ]
         , orgMacICal ? inputs.org-mac-iCal
+        , chemacs2 ? inputs.chemacs2
         }:
         homeManagerConfiguration rec {
           inherit system username;

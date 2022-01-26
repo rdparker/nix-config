@@ -6,7 +6,7 @@
 # @raycast.mode compact
 
 # Optional parameters:
-# @raycast.icon 🤖
+# @raycast.icon 🔁
 
 launchctl stop org.nixos.yabai && launchctl start org.nixos.yabai
 launchctl stop org.nixos.skhd && launchctl start org.nixos.skhd

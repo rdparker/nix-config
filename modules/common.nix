@@ -38,6 +38,7 @@
         curl
         wget
         git
+        git-annex
         jq
         multitail
         pstree

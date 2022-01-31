@@ -77,7 +77,10 @@ in
     };
     jq.enable = true;
     htop.enable = true;
-    gpg.enable = true;
+    gpg = {
+      enable = true;
+      settings.keyserver = hkps://keys.openpgp.org;
+    };
     git = {
       enable = true;
       lfs.enable = true;

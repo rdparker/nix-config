@@ -14,6 +14,9 @@
       target = ".doom.d";
       recursive = true;
     };
+    ".gnupg/dirmngr.conf".text = ''
+      standard-resolver
+      '';
     keras = {
       source = ./keras;
       target = ".keras";

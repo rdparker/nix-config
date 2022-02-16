@@ -1,6 +1,7 @@
 { inputs, config, pkgs, ... }:
 let
   homeDir = config.home.homeDirectory;
+  extraNodePackages = import ./node/default.nix { inherit pkgs; };
   pyEnv = (pkgs.stable.python3.withPackages
     (ps: with ps; [ black pylint typer colorama shellingham ]));
   sysDoNixos =
@@ -45,9 +46,10 @@ in
       };
 
       # define package definitions for current user environment
-      packages = with pkgs; [
+      packages = with pkgs; with extraNodePackages; [
         # python with default packages
         (python39.withPackages (ps: with ps; [ black numpy scipy networkx ]))
+        bash-language-server
         cachix
         comma
         coreutils-full

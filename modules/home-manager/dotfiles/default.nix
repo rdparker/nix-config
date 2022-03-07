@@ -1,10 +1,5 @@
 { config, pkgs, inputs, ... }: {
   home.file = {
-    chemacs2 = with inputs; {
-      source = chemacs2;
-      target = ".emacs.d";
-      recursive = true;
-    };
     emacs-profiles = {
       source = ./chemacs2/.emacs-profiles.el;
       target = ".emacs-profiles.el";

@@ -17,6 +17,8 @@
 ;;; Code:
 
 (("default"	.	((user-emacs-directory . "~/.emacs-riptide")))
+ ("scratch"	.	((user-emacs-directory . "~/.emacs-scratch")))
+ ("acorn"       .       ((user-emacs-directory . "~/Source/acorn")))
  ("doom"	.	((user-emacs-directory . "~/.emacs-doom")))
  ("spacemacs"	.	((user-emacs-directory . "~/.emacs-spacemacs"))))
 

@@ -43,6 +43,7 @@ in
     ];
 
     casks = [
+      "eloston-chromium"
       "goland"
       "iglance"
       "rider"

@@ -20,6 +20,7 @@
  ("scratch"	.	((user-emacs-directory . "~/.emacs-scratch")))
  ("acorn"       .       ((user-emacs-directory . "~/Source/acorn")))
  ("doom"	.	((user-emacs-directory . "~/.emacs-doom")))
+ ("prelude"	.	((user-emacs-directory . "~/.emacs-prelude")))
  ("spacemacs"	.	((user-emacs-directory . "~/.emacs-spacemacs"))))
 
 ;;; .emacs-profiles.el ends here

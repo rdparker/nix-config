@@ -38,6 +38,10 @@ in
       "beeftornado/rmtree/brew-rmtree"
       "mas"
       "pngpaste"                        # Used for Org drag and drop
+      "rust"
+      "rust-analyzer"
+      "rustfmt"
+      "rustup-init"
       "teamookla/speedtest/speedtest"
       "wallpapper"
     ];

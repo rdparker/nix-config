@@ -52,6 +52,9 @@
         shellcheck
         tmux
         zsh
+
+        # Language Support
+        rust-analyzer-unwrapped
       ];
     etc = {
       home-manager.source = "${inputs.home-manager}";

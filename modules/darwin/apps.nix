@@ -12,7 +12,7 @@
       "gswitch"
       "iina"
       "intellij-idea"
-      "karabiner-elements"
+      # "karabiner-elements"
       "keepingyouawake"
       "keybase"
       "kitty"

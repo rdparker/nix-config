@@ -4,7 +4,7 @@
       "1password"
       "firefox-beta"
       "iterm2"
-      "karabiner-elements"
+      # "karabiner-elements"
       "keepingyouawake"
       "kitty"
       "microsoft-edge"

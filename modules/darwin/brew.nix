@@ -36,6 +36,7 @@ in
 
     brews = [
       "beeftornado/rmtree/brew-rmtree"
+      "ghcup"
       "mas"
       "pngpaste"                        # Used for Org drag and drop
       "rust"

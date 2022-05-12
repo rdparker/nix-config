@@ -36,7 +36,8 @@ in
 
     brews = [
       "beeftornado/rmtree/brew-rmtree"
-      "ghcup"
+      # "ghcup"                         # Install ghcup manually
+      # "haskell-stack"                 # Install all Haskell packages through ghcup
       "mas"
       "pngpaste"                        # Used for Org drag and drop
       "rust"

@@ -111,6 +111,7 @@ in
       {
         enable = true;
         enableCompletion = true;
+        defaultKeymap = "emacs";
         autocd = true;
         dotDir = ".config/zsh";
         localVariables = {
@@ -128,6 +129,10 @@ in
         initExtra = ''
           ${functions}
           unset RPS1
+
+          test -e "''${HOME}/.iterm2_shell_integration.zsh" && source "''${HOME}/.iterm2_shell_integration.zsh"
+
+          [ -f "''${HOME}/.ghcup/env" ] && source "''${HOME}/.ghcup/env" # ghcup-env
         '';
         plugins = with pkgs; [
           (mkZshPlugin { pkg = zsh-autopair; })
@@ -141,7 +146,7 @@ in
         ];
         oh-my-zsh = {
           enable = true;
-          plugins = [ "emacs" "git" "golang" "kubectl" "sudo" "tmux"];
+          plugins = [ "emacs" "git" "golang" "iterm2" "kubectl" "rust" "sudo" "tmux"];
         };
       };
     zoxide.enable = true;

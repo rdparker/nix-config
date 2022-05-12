@@ -57,7 +57,6 @@ in
         curlie
         fd
         gawk
-        ghc
         git
         gnugrep
         gnupg

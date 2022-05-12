@@ -5,6 +5,11 @@
     enable = true;
     enableCompletion = true;
     enableBashCompletion = true;
+    # enableAutosuggestions = true;
+    enableSyntaxHighlighting = true;
+    # enableVteIntegration = true;
+    # defaultKeymap = "emacs";
+    # initExtra = "test -e \"\${HOME}/.iterm2_shell_integration.zsh\" && source \"\${HOME}/.iterm2_shell_integration.zsh\"\n[ -f \"\${HOME}/.ghcup/env\" ] && source \"\${HOME}/.ghcup/env\" # ghcup-env";
   };
 
   user = {
@@ -62,6 +67,8 @@
     };
     # list of acceptable shells in /etc/shells
     shells = with pkgs; [ bash zsh fish ];
+    # For programs.zsh.enableCompletion to pick up system commands
+    pathsToLink = [ "/share/zsh" ];
   };
 
   fonts.fonts = with pkgs; [

@@ -14,7 +14,7 @@
     package = pkgs.spacebar;
     config = {
       debug_output = "on";
-      display = "main";
+      display = "all";
       position = "top";
       clock_format = ''"%l:%M %d"'';
       text_font = ''"PragmataPro Liga:Regular:15.0"'';
@@ -29,7 +29,7 @@
       power_icon_strip = " ";
       space_icon = "•";
       space_icon_strip = "I II III IV V VI VII VIII IX X";
-      spaces_for_all_displays = "on";
+      spaces_for_all_displays = "off";
       display_separator = "on";
       display_separator_icon = "";
       space_icon_color_secondary = "0xff78c4d4";

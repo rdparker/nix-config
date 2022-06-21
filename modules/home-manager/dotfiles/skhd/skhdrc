@@ -140,7 +140,7 @@ alt - y : yabai -m space --mirror y-axis
 alt - x : yabai -m space --mirror x-axis
 
 # toggle desktop offset
-alt - a : yabai -m space --toggle padding; yabai -m space --toggle gap
+alt - a : yabai -m space --toggle padding; yabai -m space --toggle gap; yabai -m config external_bar $(yabai -m config external_bar | sed '/all/{s/all/off/;q};s/off/all/')
 
 # toggle window parent zoom
 alt - d : yabai -m window --toggle zoom-parent

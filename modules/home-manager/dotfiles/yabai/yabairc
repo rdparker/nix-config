@@ -51,6 +51,9 @@ yabai -m config left_padding                 5
 yabai -m config right_padding                5
 yabai -m config window_gap                   5
 
+# make room for the spacebar at the top of each display
+yabai -m config external_bar all:26:0
+
 #  unmanaged apps
 yabai -m rule --add app="^Cisco AnyConnect" manage=off
 yabai -m rule --add app="^System Preferences$" manage=off

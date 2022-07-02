@@ -2,7 +2,7 @@
 
 # Required parameters:
 # @raycast.schemaVersion 1
-# @raycast.title Doom Emacs
+# @raycast.title Scratch Emacs Profile
 # @raycast.mode silent
 
 # Optional parameters:

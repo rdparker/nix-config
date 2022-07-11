@@ -7,7 +7,7 @@
 
 # Optional parameters:
 # @raycast.icon 🍳
-# @raycast.packageName Doom Emacs
+# @raycast.packageName Scratch Emacs Profile
 
 open "/Users/pron/Applications/Nix Apps/Emacs.app" --args --with-profile scratch
 

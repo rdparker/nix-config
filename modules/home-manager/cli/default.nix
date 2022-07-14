@@ -130,6 +130,8 @@ in
           ${functions}
           unset RPS1
 
+          test -n "''${KITTY_PID}" && export TERM=xterm-kitty
+
           test -e "''${HOME}/.iterm2_shell_integration.zsh" && source "''${HOME}/.iterm2_shell_integration.zsh"
 
           [ -f "''${HOME}/.ghcup/env" ] && source "''${HOME}/.ghcup/env" # ghcup-env

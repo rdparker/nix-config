@@ -3,8 +3,7 @@
 # Remapped to work better on a Dvorak keyboard.
 
 # open terminal
-# cmd + ctrl - t : /Applications/Kitty.app/Contents/MacOS/kitty --single-instance -d ~
-cmd + ctrl - t : /Applications/iterm2.app
+cmd + ctrl - t : /Applications/Kitty.app/Contents/MacOS/kitty --single-instance -d ~
 shift + cmd + ctrl - e : "/User/pron/Applications/Nix Apps/Emacs.app/Contents/MacOS/Emacs --with-profile default"
 shift + cmd + ctrl - d : "/User/pron/Applications/Nix Apps/Emacs.app/Contents/MacOS/Emacs --with-profile doom"
 

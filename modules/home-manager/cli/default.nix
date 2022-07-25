@@ -98,6 +98,13 @@ in
       shellAliases = aliases;
       initExtra = ''
         source ${pkgs.nix-index}/etc/profile.d/command-not-found.sh
+
+        # If using the Kitty on macOS, use the ssh kitten.
+        if test -n "''${KITTY_PID}"; then
+          alias diff='kitty +kitten diff'
+          alias ssh='kitty +kitten ssh'
+          export TERM=xterm-kitty
+        fi
       '';
     };
     zsh =
@@ -130,7 +137,12 @@ in
           ${functions}
           unset RPS1
 
-          test -n "''${KITTY_PID}" && export TERM=xterm-kitty
+          # If using the Kitty on macOS, use the ssh kitten.
+          if test -n "''${KITTY_PID}"; then
+            alias diff='kitty +kitten diff'
+            alias ssh='kitty +kitten ssh'
+            export TERM=xterm-kitty
+          fi
 
           test -e "''${HOME}/.iterm2_shell_integration.zsh" && source "''${HOME}/.iterm2_shell_integration.zsh"
 

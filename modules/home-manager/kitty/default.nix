@@ -20,6 +20,9 @@ in
       scrollback_lines = 10000;
     };
     extraConfig = ''
+      action_alias launch_tab launch --type=tab --cwd=current
+      map f1 launch_tab
+      map f2 launch_tab emacsclient -a "" .
       ${theme}
     '';
   };

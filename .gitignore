@@ -6,3 +6,4 @@ result
 venv/
 env/
 __pycache__/
+docs/SECURITY-AUDIT.md
